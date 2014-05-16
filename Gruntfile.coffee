@@ -1,0 +1,35 @@
+module.exports = (grunt) ->
+  grunt.initConfig
+    watch:
+      coffee:
+        files: ['src/*.coffee', 'specs/*.coffee'],
+        tasks: ['coffee:sourceCompile', 'coffee:testCompile', 'test']
+
+    coffee:
+      sourceCompile:
+        expand: true,
+        flatten: true,
+        cwd: "#{__dirname}/src/",
+        src: ['*.coffee'],
+        dest: 'js/',
+        ext: '.js'
+      testCompile:
+        expand: true,
+        flatten: true,
+        cwd: "#{__dirname}/specs/",
+        src: ['*.coffee'],
+        dest: 'specs/js/',
+        ext: '.js'
+
+    jasmine:
+      test:
+        src: ['lib/js/*.js', 'js/*.js'],
+        options:
+          specs: 'specs/js/*Spec.js',
+
+  grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-contrib-jasmine'
+
+  grunt.registerTask 'test', ['jasmine']
+  grunt.registerTask 'default', ['watch']
