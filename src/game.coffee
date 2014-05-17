@@ -1,32 +1,28 @@
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 540
 
-movement_speed = 10
-circle = null
 keys = null
 player = null
 
+preload = ->
+  game.load.image('jake', 'assets/Jake.png')
+
 create = ->
-  player = new Game.Player(game.world.centerX, movement_speed)
-  circle = new Phaser.Circle(player.position, 400,64)
+  keys = game.input.keyboard.createCursorKeys()
+
+  sprite = game.add.sprite(0, 200, 'jake')
+  player = new Game.Player(game.world.centerX, sprite)
 
   game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT
-
   game.input.onDown.add(gofull, this)
-
-  keys = game.input.keyboard.createCursorKeys()
 
 update = ->
   player.update(keys, WINDOW_WIDTH)
-  circle.x = player.x
-
-render = ->
-  game.debug.geom(circle,'#cfffff')
 
 gofull = ->
   game.scale.startFullScreen()
 
 game = new Phaser.Game(WINDOW_WIDTH, WINDOW_HEIGHT, Phaser.AUTO, '', {
+  preload: preload,
   create: create,
-  update: update,
-  render: render })
+  update: update})

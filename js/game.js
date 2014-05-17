@@ -1,33 +1,29 @@
 (function() {
-  var WINDOW_HEIGHT, WINDOW_WIDTH, circle, create, game, gofull, keys, movement_speed, player, render, update;
+  var WINDOW_HEIGHT, WINDOW_WIDTH, create, game, gofull, keys, player, preload, update;
 
   WINDOW_WIDTH = 960;
 
   WINDOW_HEIGHT = 540;
 
-  movement_speed = 10;
-
-  circle = null;
-
   keys = null;
 
   player = null;
 
+  preload = function() {
+    return game.load.image('jake', 'assets/Jake.png');
+  };
+
   create = function() {
-    player = new Game.Player(game.world.centerX, movement_speed);
-    circle = new Phaser.Circle(player.position, 400, 64);
+    var sprite;
+    keys = game.input.keyboard.createCursorKeys();
+    sprite = game.add.sprite(0, 200, 'jake');
+    player = new Game.Player(game.world.centerX, sprite);
     game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-    game.input.onDown.add(gofull, this);
-    return keys = game.input.keyboard.createCursorKeys();
+    return game.input.onDown.add(gofull, this);
   };
 
   update = function() {
-    player.update(keys, WINDOW_WIDTH);
-    return circle.x = player.x;
-  };
-
-  render = function() {
-    return game.debug.geom(circle, '#cfffff');
+    return player.update(keys, WINDOW_WIDTH);
   };
 
   gofull = function() {
@@ -35,9 +31,9 @@
   };
 
   game = new Phaser.Game(WINDOW_WIDTH, WINDOW_HEIGHT, Phaser.AUTO, '', {
+    preload: preload,
     create: create,
-    update: update,
-    render: render
+    update: update
   });
 
 }).call(this);

@@ -1,6 +1,7 @@
 (function() {
   Game.Player = (function() {
-    function Player(position) {
+    function Player(position, sprite) {
+      this.sprite = sprite;
       this.x = position;
       this.speed = 10;
     }
@@ -10,8 +11,10 @@
         this.x += this.speed;
       }
       if (keys.left.isDown && this.x > 0) {
-        return this.x -= this.speed;
+        this.x -= this.speed;
       }
+      this.sprite.x = this.x;
+      return this.sprite.update();
     };
 
     return Player;
