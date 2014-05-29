@@ -14,13 +14,9 @@ create = ->
   player = new Game.Player(game.world.centerX, sprite)
 
   game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT
-  game.input.onDown.add(gofull, this)
 
 update = ->
   player.update(keys, WINDOW_WIDTH)
-
-gofull = ->
-  game.scale.startFullScreen()
 
 game = new Phaser.Game(WINDOW_WIDTH, WINDOW_HEIGHT, Phaser.AUTO, '', {
   preload: preload,

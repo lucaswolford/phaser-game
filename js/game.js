@@ -1,5 +1,5 @@
 (function() {
-  var WINDOW_HEIGHT, WINDOW_WIDTH, create, game, gofull, keys, player, preload, update;
+  var WINDOW_HEIGHT, WINDOW_WIDTH, create, game, keys, player, preload, update;
 
   WINDOW_WIDTH = 960;
 
@@ -18,16 +18,11 @@
     keys = game.input.keyboard.createCursorKeys();
     sprite = game.add.sprite(0, 200, 'jake');
     player = new Game.Player(game.world.centerX, sprite);
-    game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-    return game.input.onDown.add(gofull, this);
+    return game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
   };
 
   update = function() {
     return player.update(keys, WINDOW_WIDTH);
-  };
-
-  gofull = function() {
-    return game.scale.startFullScreen();
   };
 
   game = new Phaser.Game(WINDOW_WIDTH, WINDOW_HEIGHT, Phaser.AUTO, '', {
