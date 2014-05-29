@@ -3,4 +3,4 @@ describe 'Player', ->
     @player = new Game.Player(600)
 
   it 'has position', ->
-    expect(@player.x).toBe( 600 )
+    expect(@player.x).toBe(600)

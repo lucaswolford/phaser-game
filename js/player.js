@@ -6,6 +6,8 @@
       this.speed = 10;
     }
 
+    Player.prototype.position = Player.x;
+
     Player.prototype.update = function(keys, window_width) {
       if (keys.right.isDown && this.x < window_width) {
         this.x += this.speed;
