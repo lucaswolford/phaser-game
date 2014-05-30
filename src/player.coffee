@@ -1,16 +1,18 @@
 class Game.Player
   constructor: (position, sprite) ->
     @sprite = sprite
-    @x = position
-    @speed = 10
+    @speed = 400
+    @direction = 0
 
-  position:
-    @x
+  update: (keys) ->
+    @sprite.body.setZeroVelocity()
 
-  update: (keys, window_width) ->
-    if (keys.right.isDown && @x < window_width)
-      @x += @speed
-    if (keys.left.isDown && @x > 0)
-      @x -= @speed
-    @sprite.x = @x
+    if keys.right.isDown
+      @sprite.body.moveRight(@speed)
+      @sprite.scale.x *= -1 if @direction == 1
+      @direction = 0
+    if keys.left.isDown
+      @sprite.body.moveLeft(@speed)
+      @sprite.scale.x *= -1 if @direction == 0
+      @direction = 1
     @sprite.update()

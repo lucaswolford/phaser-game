@@ -2,20 +2,26 @@
   Game.Player = (function() {
     function Player(position, sprite) {
       this.sprite = sprite;
-      this.x = position;
-      this.speed = 10;
+      this.speed = 400;
+      this.direction = 0;
     }
 
-    Player.prototype.position = Player.x;
-
-    Player.prototype.update = function(keys, window_width) {
-      if (keys.right.isDown && this.x < window_width) {
-        this.x += this.speed;
+    Player.prototype.update = function(keys) {
+      this.sprite.body.setZeroVelocity();
+      if (keys.right.isDown) {
+        this.sprite.body.moveRight(this.speed);
+        if (this.direction === 1) {
+          this.sprite.scale.x *= -1;
+        }
+        this.direction = 0;
       }
-      if (keys.left.isDown && this.x > 0) {
-        this.x -= this.speed;
+      if (keys.left.isDown) {
+        this.sprite.body.moveLeft(this.speed);
+        if (this.direction === 0) {
+          this.sprite.scale.x *= -1;
+        }
+        this.direction = 1;
       }
-      this.sprite.x = this.x;
       return this.sprite.update();
     };
 
