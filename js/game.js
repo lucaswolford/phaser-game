@@ -1,5 +1,5 @@
 (function() {
-  var WINDOW_HEIGHT, WINDOW_WIDTH, create, game, keys, player, preload, update;
+  var WINDOW_HEIGHT, WINDOW_WIDTH, bg, create, game, keys, player, preload, update;
 
   WINDOW_WIDTH = 960;
 
@@ -9,26 +9,30 @@
 
   player = null;
 
+  bg = null;
+
   preload = function() {
     game.load.image('jake', 'assets/Jake2.png');
-    return game.load.image('background', 'assets/wallpaper.png');
+    game.load.image('background', 'assets/wallpaper.png');
+    return game.load.image('background2', 'assets/wallpaper2.jpg');
   };
 
   create = function() {
-    var playerSprite;
-    game.add.tileSprite(0, 0, 5000, 540, 'background');
+    bg = game.add.tileSprite(0, 0, 5000, 540, 'background');
     game.world.setBounds(0, 0, 5000, 540);
     game.physics.startSystem(Phaser.Physics.P2JS);
     keys = game.input.keyboard.createCursorKeys();
-    playerSprite = game.add.sprite(0, 400, 'jake');
-    playerSprite.cameraOffset.x = game.world.centerX;
-    game.camera.follow(playerSprite);
-    game.physics.p2.enable(playerSprite);
-    return player = new Game.Player(game.world.centerX, playerSprite);
+    return player = new Game.Player(game);
   };
 
   update = function() {
-    return player.update(keys);
+    player.update(keys);
+    if (keys.up.isDown) {
+      bg.loadTexture('background2', 0);
+    }
+    if (keys.down.isDown) {
+      return bg.loadTexture('background', 0);
+    }
   };
 
   game = new Phaser.Game(WINDOW_WIDTH, WINDOW_HEIGHT, Phaser.AUTO, '', {

@@ -1,6 +1,9 @@
 class Game.Player
-  constructor: (position, sprite) ->
-    @sprite = sprite
+  constructor: (game) ->
+    @sprite = game.add.sprite(0, 400, 'jake')
+    @sprite.cameraOffset.x = game.world.centerX
+    game.camera.follow(@sprite)
+    game.physics.p2.enable(@sprite)
     @speed = 400
     @direction = 0
 

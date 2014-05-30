@@ -1,7 +1,10 @@
 (function() {
   Game.Player = (function() {
-    function Player(position, sprite) {
-      this.sprite = sprite;
+    function Player(game) {
+      this.sprite = game.add.sprite(0, 400, 'jake');
+      this.sprite.cameraOffset.x = game.world.centerX;
+      game.camera.follow(this.sprite);
+      game.physics.p2.enable(this.sprite);
       this.speed = 400;
       this.direction = 0;
     }
