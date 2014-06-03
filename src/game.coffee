@@ -4,9 +4,10 @@ WINDOW_HEIGHT = 540
 keys = null
 player = null
 bg = null
+rm = null
 
 preload = ->
-  game.load.image('jake', 'assets/Jake2.png')
+  game.load.image('porygon', 'assets/porygon.png')
   game.load.image('background', 'assets/wallpaper.png')
   game.load.image('background2', 'assets/wallpaper2.jpg')
 
@@ -18,16 +19,18 @@ create = ->
   keys = game.input.keyboard.createCursorKeys()
 
   player = new Game.Player(game)
+  rm = new Game.RoomManager()
+
+  rm.add_room('background')
+  rm.add_room('background2')
 
 update = ->
   player.update(keys)
 
   if keys.up.isDown
-    bg.loadTexture('background2', 0)
+    alert "Check for player/door collision."
 
-  if keys.down.isDown
-    bg.loadTexture('background', 0)
-
+  bg.loadTexture(rm.current_room_texture())
 
 
 game = new Phaser.Game(WINDOW_WIDTH, WINDOW_HEIGHT, Phaser.AUTO, '', {
