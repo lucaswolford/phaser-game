@@ -12,8 +12,8 @@ preload = ->
   game.load.image('background2', 'assets/wallpaper2.jpg')
 
 create = ->
-  bg = game.add.tileSprite(0, 0, 5000, 540, 'background')
-  game.world.setBounds(0, 0, 5000, 540)
+  bg = game.add.tileSprite(0, 0, 3000, 540, 'background')
+  game.world.setBounds(0, 0, 3000, 540)
   game.physics.startSystem(Phaser.Physics.P2JS)
 
   keys = game.input.keyboard.createCursorKeys()
@@ -28,7 +28,8 @@ update = ->
   player.update(keys)
 
   if keys.up.isDown
-    alert "Check for player/door collision."
+    rm.set_current_room_index(rm.current_room_index + 1)
+
 
   bg.loadTexture(rm.current_room_texture())
 

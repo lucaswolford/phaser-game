@@ -14,6 +14,10 @@ class Game.RoomManager
 
   set_current_room_index: (room) ->
     @current_room_index = room
+    if @current_room_index < 0
+      @current_room_index = 0
+    if @current_room_index > @room_count() - 1
+      @current_room_index = @room_count() - 1
 
   current_room: ->
     @rooms[ @current_room_index ]
