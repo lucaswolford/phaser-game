@@ -8,7 +8,7 @@ describe 'RoomManager', ->
 
   describe '#add_room', ->
     it 'should add a new room', ->
-      @manager.add_room('texture')
+      @manager.add_room('texture', [])
       expect( @manager.room_count() ).toBe 1
 
 
@@ -19,8 +19,8 @@ describe 'RoomManager', ->
 
   describe '#set_current_room_index', ->
     beforeEach ->
-      @manager.add_room('room')
-      @manager.add_room('room')
+      @manager.add_room('room', [])
+      @manager.add_room('room', [])
     it 'sets the current room index', ->
       @manager.set_current_room_index(1)
       expect( @manager.current_room_index ).toBe( 1 )

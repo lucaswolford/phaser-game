@@ -3,8 +3,8 @@ class Game.RoomManager
     @rooms = []
     @current_room_index = 0
 
-  add_room: (texture) ->
-    @rooms.push new Game.Room(texture)
+  add_room: (texture, doors) ->
+    @rooms.push new Game.Room(texture, doors)
 
   get_rooms: ->
    @rooms
