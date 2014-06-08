@@ -8,38 +8,45 @@ rm = null
 door0 = null
 door1 = null
 keysGo = null
+layer1 = null
+layer2 = null
+layer3 = null
+layer4 = null
 
 preload = ->
   game.load.image('porygon', 'assets/porygon.png')
   game.load.image('door', 'assets/portal.png')
-  game.load.image('background0', 'assets/wallpaper.png')
-  game.load.image('background1', 'assets/wallpaper2.jpg')
-  game.load.image('background2', 'assets/wallpaper3.jpg')
+  game.load.image('layer1', 'assets/layer1.jpg')
+  game.load.image('layer2', 'assets/layer2.png')
+  game.load.image('layer3', 'assets/layer3.png')
+  game.load.image('layer4', 'assets/layer4.png')
 
 create = ->
-  bg = game.add.tileSprite(0, 0, 3000, 540, 'background')
   game.world.setBounds(0, 0, 3000, 540)
   game.physics.startSystem(Phaser.Physics.P2JS)
 
-  keys = game.input.keyboard.createCursorKeys()
+  layer1 = game.add.sprite(-500, 0, 'layer1')
+  layer2 = game.add.sprite(-500, 0, 'layer2')
+  layer3 = game.add.sprite(0, 0, 'layer3')
+  layer4 = game.add.sprite(0, 0, 'layer4')
 
   door0 = new Game.Door(game, 1000, 0, 2)
   door1 = new Game.Door(game, 500, 0, 1)
 
   rm = new Game.RoomManager()
-  rm.add_room('background0', [door0, door1])
-  rm.add_room('background1', [door1])
-  rm.add_room('background2', [door0])
+  rm.add_room('layer1', [door0, door1])
+  rm.add_room('layer1', [door1])
+  rm.add_room('layer1', [door0])
 
   player = new Game.Player(game)
 
-  #Keyboard
+
+  keys = game.input.keyboard.createCursorKeys()
+  # set keyboard callbacks
   keysGo = [ game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR),
              game.input.keyboard.addKey(Phaser.Keyboard.ENTER) ]
   for key in keysGo
     key.onDown.add(onKeyPress)
-
-  bg.loadTexture(rm.current_room_texture())
 
 onKeyPress = ->
   for door in rm.current_room().get_doors()
@@ -59,7 +66,8 @@ changeRooms = (door) ->
 update = ->
   player.update(keys)
 
-  console.log rm.current_room_index
+  layer1.x = (game.camera.x / 5)
+  layer2.x = (game.camera.x / 4)
 
 game = new Phaser.Game(WINDOW_WIDTH, WINDOW_HEIGHT, Phaser.AUTO, '', {
   preload: preload,

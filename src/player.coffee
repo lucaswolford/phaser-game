@@ -1,6 +1,6 @@
 class Game.Player
   constructor: (game) ->
-    @sprite = game.add.sprite(0, 400, 'porygon')
+    @sprite = game.add.sprite(400, 400, 'porygon')
     @sprite.cameraOffset.x = game.world.centerX
     game.camera.follow(@sprite)
     game.physics.p2.enable(@sprite)
@@ -19,3 +19,6 @@ class Game.Player
       @sprite.scale.x *= -1 if @direction == 0
       @direction = 1
     @sprite.update()
+
+  x: ->
+    @sprite.x
