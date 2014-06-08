@@ -23,9 +23,10 @@ module.exports = (grunt) ->
 
     jasmine:
       test:
-        src: ['lib/js/*.js', 'js/*.js'],
+        src: ['dist/lib/js/*.js', 'dist/js/*.js'],
         options:
           specs: 'specs/js/*Spec.js',
+
     'gh-pages':
       options:
         base: 'dist'
@@ -34,6 +35,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
+  grunt.loadNpmTasks 'grunt-gh-pages'
 
   grunt.registerTask 'test', ['jasmine']
   grunt.registerTask 'default', ['watch']
