@@ -11,7 +11,7 @@ module.exports = (grunt) ->
         flatten: true,
         cwd: "#{__dirname}/src/",
         src: ['*.coffee'],
-        dest: 'js/',
+        dest: 'dist/js/',
         ext: '.js'
       testCompile:
         expand: true,
@@ -26,6 +26,10 @@ module.exports = (grunt) ->
         src: ['lib/js/*.js', 'js/*.js'],
         options:
           specs: 'specs/js/*Spec.js',
+    'gh-pages':
+      options:
+        base: 'js'
+      src: '**'
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
@@ -33,3 +37,4 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'test', ['jasmine']
   grunt.registerTask 'default', ['watch']
+  grunt.registerTask 'deploy', ['jasmine', 'gh-pages']
