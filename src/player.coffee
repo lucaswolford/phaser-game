@@ -1,11 +1,11 @@
 class Game.Player
   constructor: (game) ->
-    @sprite = game.add.sprite(400, 400, 'porygon')
+    @sprite = game.add.sprite(400, 400, 'wife')
     @sprite.cameraOffset.x = game.world.centerX
     game.camera.follow(@sprite)
     game.physics.p2.enable(@sprite)
     @speed = 400
-    @direction = 1
+    @direction = 0
 
   update: (keys) ->
     @sprite.body.setZeroVelocity()
