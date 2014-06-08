@@ -28,7 +28,7 @@ module.exports = (grunt) ->
           specs: 'specs/js/*Spec.js',
     'gh-pages':
       options:
-        base: 'js'
+        base: 'dist'
       src: '**'
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
