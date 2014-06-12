@@ -55,7 +55,8 @@
     player = new Game.Player(game);
     lighting = game.add.sprite(0, 0, 'light');
     layer4 = game.add.sprite(0, 0, 'layer4');
-    keys = game.input.keyboard.createCursorKeys();
+    game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     keysGo = [game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR), game.input.keyboard.addKey(Phaser.Keyboard.ENTER)];
     _results = [];
     for (_i = 0, _len = keysGo.length; _i < _len; _i++) {
@@ -99,7 +100,7 @@
   };
 
   update = function() {
-    player.update(keys);
+    player.update(game);
     lighting.x = player.x() - 1100;
     layer1.x = game.camera.x / 3;
     layer2.x = game.camera.x / 5;
