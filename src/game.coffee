@@ -44,7 +44,8 @@ create = ->
 
   layer4 = game.add.sprite(0, 0, 'layer4')
 
-  keys = game.input.keyboard.createCursorKeys()
+  game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
+  game.input.keyboard.addKey(Phaser.Keyboard.LEFT)
   # set keyboard callbacks
   keysGo = [ game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR),
              game.input.keyboard.addKey(Phaser.Keyboard.ENTER) ]
@@ -67,7 +68,7 @@ changeRooms = (door) ->
     new_door.sprite.reset(new_door.position, 300, 0)
 
 update = ->
-  player.update(keys)
+  player.update(game)
   lighting.x = player.x() - 1100
 
   layer1.x = (game.camera.x / 3)
